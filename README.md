@@ -1,4 +1,3 @@
-<!-- === STEAM ID — CSS === -->
 <style>
 /* === Steam Verification Block === */
  .steam-verify-block {
@@ -181,9 +180,256 @@
  .steam-verify-success-msg .material-symbols-outlined {
  font-size: 18px;
  }
+
+/* === Achievements Section === */
+ .ach-section {
+ padding: 20px 24px;
+ border-top: 1px solid rgba(255,255,255,0.08);
+ }
+ .ach-header {
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ font-size: 16px;
+ font-weight: 600;
+ color: #e0e6f0;
+ margin-bottom: 16px;
+ }
+ .ach-header .material-symbols-outlined {
+ font-size: 22px;
+ color: #66c0f4;
+ }
+ .ach-grid {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 12px;
+ }
+ .ach-item {
+ position: relative;
+ cursor: pointer;
+ transition: transform 0.2s ease;
+ }
+ .ach-item:hover {
+ transform: scale(1.08);
+ }
+ .ach-item img {
+ width: 70px;
+ height: 70px;
+ object-fit: cover;
+ border-radius: 10px;
+ border: 2px solid rgba(255,255,255,0.15);
+ display: block;
+ }
+ 
+ .ach-delete-btn {
+ position: absolute;
+ top: -4px;
+ right: -4px;
+ width: 18px;
+ height: 18px;
+ border-radius: 50%;
+ background: #dc2626;
+ color: #fff;
+ border: none;
+ font-size: 12px;
+ line-height: 18px;
+ text-align: center;
+ cursor: pointer;
+ display: none;
+ z-index: 10;
+ padding: 0;
+ }
+ .ach-item:hover .ach-delete-btn {
+ display: block;
+ }
+
+ .ach-tooltip {
+ position: absolute;
+ bottom: calc(100% + 12px);
+ left: 50%;
+ transform: translateX(-50%) translateY(8px) scale(0.8);
+ opacity: 0;
+ background: #1a1a2e;
+ color: #fff;
+ padding: 12px 16px;
+ border-radius: 12px;
+ font-size: 13px;
+ line-height: 1.5;
+ max-width: 260px;
+ min-width: 160px;
+ box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+ pointer-events: none;
+ z-index: 100;
+ transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ white-space: normal;
+ text-align: center;
+ }
+ .ach-tooltip::after {
+ content: '';
+ position: absolute;
+ top: 100%;
+ left: 50%;
+ transform: translateX(-50%);
+ border: 7px solid transparent;
+ border-top-color: #1a1a2e;
+ }
+ .ach-item.active .ach-tooltip {
+ transform: translateX(-50%) translateY(0) scale(1);
+ opacity: 1;
+ }
+ .ach-tooltip .ach-title {
+ display: block;
+ font-weight: 700;
+ color: #66c0f4;
+ margin-bottom: 4px;
+ font-size: 14px;
+ }
+ .ach-empty {
+ color: #6b7280;
+ font-size: 13px;
+ font-style: italic;
+ }
+
+ /* === Admin Panel === */
+ .ach-admin-btn {
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ margin-top: 16px;
+ padding: 8px 16px;
+ background: rgba(102,192,244,0.1);
+ border: 1px solid rgba(102,192,244,0.3);
+ color: #66c0f4;
+ border-radius: 8px;
+ cursor: pointer;
+ font-size: 13px;
+ font-weight: 500;
+ font-family: 'Inter', sans-serif;
+ transition: all 0.2s;
+ }
+ .ach-admin-btn:hover {
+ background: rgba(102,192,244,0.2);
+ }
+ .ach-admin-panel {
+ display: none;
+ margin-top: 16px;
+ padding: 16px;
+ background: rgba(0,0,0,0.3);
+ border-radius: 12px;
+ border: 1px dashed rgba(102,192,244,0.25);
+ }
+ .ach-admin-panel.visible {
+ display: block;
+ }
+ .ach-admin-panel h4 {
+ margin: 0 0 12px 0;
+ color: #e0e6f0;
+ font-size: 14px;
+ }
+ .ach-img-picker {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 8px;
+ margin-bottom: 12px;
+ }
+ .ach-img-option {
+ width: 56px;
+ height: 56px;
+ border-radius: 8px;
+ border: 3px solid transparent;
+ cursor: pointer;
+ object-fit: cover;
+ transition: all 0.2s;
+ }
+ .ach-img-option:hover {
+ border-color: rgba(102,192,244,0.5);
+ transform: scale(1.1);
+ }
+ .ach-img-option.selected {
+ border-color: #66c0f4;
+ box-shadow: 0 0 12px rgba(102,192,244,0.4);
+ }
+ .ach-admin-input {
+ width: 100%;
+ box-sizing: border-box;
+ padding: 8px 12px;
+ margin-bottom: 10px;
+ border-radius: 8px;
+ border: 1px solid rgba(255,255,255,0.12);
+ background: rgba(0,0,0,0.3);
+ color: #e0e6f0;
+ font-size: 13px;
+ font-family: 'Inter', sans-serif;
+ outline: none;
+ }
+ .ach-admin-input:focus {
+ border-color: #66c0f4;
+ }
+ .ach-admin-input::placeholder {
+ color: #5a6378;
+ }
+ .ach-add-btn {
+ padding: 10px 20px;
+ border-radius: 8px;
+ border: none;
+ background: linear-gradient(135deg, #1b2838, #2a475e);
+ color: #c7d0e0;
+ font-size: 13px;
+ font-weight: 600;
+ cursor: pointer;
+ font-family: 'Inter', sans-serif;
+ transition: all 0.2s;
+ }
+ .ach-add-btn:hover {
+ background: linear-gradient(135deg, #2a475e, #66c0f4);
+ color: #fff;
+ }
 </style>
 
-<!-- === STEAM ID — HTML === -->
+
+<!-- ===================== HTML ===================== -->
+<!-- === ACHIEVEMENTS SECTION === -->
+ <div class="ach-section">
+ <div class="ach-header">
+ <span class="material-symbols-outlined">military_tech</span>
+ Достижения
+ </div>
+ <div class="ach-grid" id="achGrid">
+ <div class="ach-empty" id="achEmpty">Достижений пока нет</div>
+ </div>
+ <?if($GROUP_ID$ = '4')?>
+ <button class="ach-admin-btn" onclick="achToggleAdmin()">
+ <span class="material-symbols-outlined" style="font-size:16px;">add_circle</span>
+ Добавить достижение
+ </button>
+ <div class="ach-admin-panel" id="achAdminPanel">
+ <h4>Выберите картинку достижения:</h4>
+ <div class="ach-img-picker" id="achImgPicker">
+ <img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/Screenshot_2-fotor-bg-remover-20260926224846.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/Screenshot_2-fotor-bg-remover-20260926224846.png')" alt="Достижение 1">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/Screenshot_8-fotor-bg-remover-20260926224924.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/Screenshot_8-fotor-bg-remover-20260926224924.png')" alt="Достижение 2">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/Screenshot_4-fotor-bg-remover-2026092622505.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/Screenshot_4-fotor-bg-remover-2026092622505.png')" alt="Достижение 3">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/2de846dbc4a11f1ac4d768cfd41a853_1.jpeg" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/2de846dbc4a11f1ac4d768cfd41a853_1.jpeg')" alt="Достижение 4">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/Screenshot_4-fotor-bg-remover-20260926223859.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/Screenshot_4-fotor-bg-remover-20260926223859.png')" alt="Достижение 5">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/Screenshot_9-fotor-bg-remover-2026092615118.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/Screenshot_9-fotor-bg-remover-2026092615118.png')" alt="Достижение 6">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/Screenshot_7-fotor-bg-remover-2026092615157.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/Screenshot_7-fotor-bg-remover-2026092615157.png')" alt="Достижение 7">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/Screenshot_15-fotor-bg-remover-202609304119.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/Screenshot_15-fotor-bg-remover-202609304119.png')" alt="Достижение 8">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/osen-fotor-bg-remover-2026092603655.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/osen-fotor-bg-remover-2026092603655.png')" alt="Достижение 9">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/Screenshot_3-fotor-bg-remover-2026092622425.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/Screenshot_3-fotor-bg-remover-2026092622425.png')" alt="Достижение 10">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/Screenshot_7-fotor-bg-remover-20260926224621.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/Screenshot_7-fotor-bg-remover-20260926224621.png')" alt="Достижение 11">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/1_kusok_chak_chak-fotor-bg-remover-20260929235845.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/1_kusok_chak_chak-fotor-bg-remover-20260929235845.png')" alt="Достижение 12">
+<img class="ach-img-option" src="https://4ak4ak.moy.su/dostizhenia/Screenshot_1.png" onclick="achSelectImg(this, 'https://4ak4ak.moy.su/dostizhenia/Screenshot_1.png')" alt="Достижение 13">
+
+ </div>
+ <input type="hidden" id="achSelectedImg" value="">
+ <input type="text" class="ach-admin-input" id="achTitle" placeholder="Название достижения (например: Легенда)">
+ <input type="text" class="ach-admin-input" id="achDesc" placeholder="За что выдано (например: За 1000 часов в игре)">
+ <button class="ach-add-btn" onclick="achAdd()">Добавить достижение</button>
+ <button class="ach-admin-btn" style="margin-left:8px;" onclick="achToggleAdmin()">Отмена</button>
+ </div>
+ <?endif?>
+ </div>
+ <!-- === END ACHIEVEMENTS SECTION === -->
+
 <!-- === STEAM VERIFICATION BLOCK === -->
  <div class="steam-verify-block" id="steamVerifyBlock">
  <div class="steam-verify-title">
@@ -246,183 +492,406 @@
  </div>
  <!-- === END STEAM VERIFICATION BLOCK === -->
 
-<!-- === STEAM VERIFICATION SCRIPT === -->
-<!-- Firebase SDK -->
+<!-- ===================== FIREBASE SDK ===================== -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+
+<!-- ===================== JAVASCRIPT ===================== -->
 <script>
+// ====================================================================
+// FIREBASE INIT
+// ====================================================================
+var firebaseConfig = {
+  apiKey: "AIzaSyCNQ0WFAiQjnISQjXJnHoln-wI64G2BqWs",
+  authDomain: "ak4ak-d948e.firebaseapp.com",
+  databaseURL: "https://ak4ak-d948e-default-rtdb.firebaseio.com",
+  projectId: "ak4ak-d948e",
+  storageBucket: "ak4ak-d948e.firebasestorage.app",
+  messagingSenderId: "787151252619",
+  appId: "1:787151252619:web:05eff65dc74b01d6e8f88e",
+  measurementId: "G-DBB4YBNF2Q"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+// ====================================================================
+// ПЕРЕМЕННЫЕ UCOZ
+// ====================================================================
+var profileUserId = '$_USER_ID$';
+var profileUserName = '$USERNAME$';
+var isOwnProfile = '<?if($_IS_OWN_PROFILE$)?>1<?else?>0<?endif?>' === '1';
+var achIsAdmin = '<?if($GROUP_ID$="4")?>1<?else?>0<?endif?>' === '1';
+var BACKEND_URL = 'https://steam-verify-backend.onrender.com';
+
+
+// ====================================================================
+// ДОСТИЖЕНИЯ — Firebase Realtime Database
+// Путь: achievements/$_USER_ID$
+// Структура: [ { img, title, desc, addedAt }, ... ]
+// ====================================================================
 (function() {
- var profileUserId = '$_USER_ID$';
- var profileUsername = '$_USERNAME$';
- var isOwnProfile = '<?if($_IS_OWN_PROFILE$)?>1<?else?>0<?endif?>' === '1';
+  var selectedImgUrl = '';
+  var achRef = db.ref('achievements/' + profileUserId);
 
- // Firebase config
- var firebaseConfig = {
- apiKey: "AIzaSyCNQ0WFAiQjnISQjXJnHoln-wI64G2BqWs",
- authDomain: "ak4ak-d948e.firebaseapp.com",
- databaseURL: "https://ak4ak-d948e-default-rtdb.firebaseio.com",
- projectId: "ak4ak-d948e",
- storageBucket: "ak4ak-d948e.firebasestorage.app",
- messagingSenderId: "787151252619",
- appId: "1:787151252619:web:05eff65dc74b01d6e8f88e",
- measurementId: "G-DBB4YBNF2Q"
- };
- firebase.initializeApp(firebaseConfig);
- var db = firebase.database();
+  window.addEventListener('DOMContentLoaded', function() {
+    achRef.on('value', function(snapshot) {
+      achRender(snapshot.val() || []);
+    }, function(err) {
+      console.error('Firebase achievements error:', err);
+    });
+  });
 
- // Path in Firebase Realtime Database: steamIds / $_USER_ID$
- var steamRef = db.ref('steamIds/' + profileUserId);
+  function achSaveData(data) {
+    // Сохраняем весь массив достижений в Firebase
+    achRef.set(data);
+  }
 
- window.addEventListener('DOMContentLoaded', function() {
- loadSteamData();
- });
+  function achGetData(callback) {
+    achRef.once('value', function(snapshot) {
+      callback(snapshot.val() || []);
+    });
+  }
 
- // Load Steam data from Firebase (real-time)
- function loadSteamData() {
- steamRef.on('value', function(snap) {
- var data = snap.val() || {};
- renderSteamBlock(data);
- });
- }
+  function achRender(data) {
+    // data может быть объектом или массивом — нормализуем
+    var items = [];
+    if (Array.isArray(data)) {
+      items = data;
+    } else if (data && typeof data === 'object') {
+      Object.keys(data).forEach(function(key) {
+        items.push(data[key]);
+      });
+    }
 
- function renderSteamBlock(data) {
- var input = document.getElementById('steamIdInput');
- var statusRow = document.getElementById('steamStatusRow');
- var verifiedRow = document.getElementById('steamVerifiedRow');
- var saveBtn = document.getElementById('steamSaveBtn');
+    var grid = document.getElementById('achGrid');
+    var empty = document.getElementById('achEmpty');
+    if (!grid) return;
 
- if (data.steamId) {
- input.value = data.steamId;
+    if (items.length === 0) {
+      if (empty) empty.style.display = 'block';
+      grid.innerHTML = '';
+      return;
+    }
+    if (empty) empty.style.display = 'none';
+    grid.innerHTML = '';
 
- if (data.verified) {
- // Show verified state
- statusRow.style.display = 'none';
- verifiedRow.style.display = 'flex';
- var link = document.getElementById('steamProfileLink');
- link.href = getSteamProfileUrl(data.steamId);
- link.textContent = data.steamId;
- } else {
- // Show unverified state
- statusRow.style.display = 'flex';
- verifiedRow.style.display = 'none';
- var badge = document.getElementById('steamStatusBadge');
- badge.className = 'steam-status-badge unverified';
- badge.innerHTML = '<span class="material-symbols-outlined">pending</span><span id="steamStatusText">Не подтверждён</span>';
- }
- } else {
- input.value = '';
- statusRow.style.display = 'none';
- verifiedRow.style.display = 'none';
- }
+    items.forEach(function(item, index) {
+      var div = document.createElement('div');
+      div.className = 'ach-item';
+      div.onclick = function() { achToggleTooltip(this); };
 
- // If not own profile — make input read-only, hide buttons
- if (!isOwnProfile) {
- input.readOnly = true;
- if (saveBtn) saveBtn.style.display = 'none';
- }
- }
+      var deleteBtn = '';
+      if (achIsAdmin) {
+        deleteBtn = '<button class="ach-delete-btn" onclick="achDelete(' + index + '); event.stopPropagation();" title="Удалить">&times;</button>';
+      }
 
- function generateVerifyCode() {
- var part1 = Math.random().toString(36).substring(2, 7).toUpperCase();
- var part2 = Math.random().toString(36).substring(2, 7).toUpperCase();
- return 'APEX-' + part1 + '-' + part2;
- }
+      div.innerHTML = '<img src="' + (item.img || '') + '" alt="' + (item.title || '') + '">' +
+        deleteBtn +
+        '<div class="ach-tooltip">' +
+        '<span class="ach-title">' + (item.title || '') + '</span>' +
+        (item.desc || '') +
+        '</div>';
+      grid.appendChild(div);
+    });
+  }
 
- function getSteamProfileUrl(steamId) {
- steamId = steamId.trim();
- if (steamId.indexOf('STEAM_') === 0) {
- var parts = steamId.split(':');
- if (parts.length === 3) {
- var accountId = parseInt(parts[2]) * 2 + parseInt(parts[1]);
- var base = 76561197960265728;
- if (typeof BigInt !== 'undefined') {
- var result = BigInt(base) + BigInt(accountId);
- return 'https://steamcommunity.com/profiles/' + result.toString();
- } else {
- var result2 = base + accountId;
- return 'https://steamcommunity.com/profiles/' + result2;
- }
- }
- }
- if (/^\d{17}$/.test(steamId)) {
- return 'https://steamcommunity.com/profiles/' + steamId;
- }
- return 'https://steamcommunity.com/profiles/' + steamId.replace(/[^a-zA-Z0-9_-]/g, '');
- }
+  window.achToggleTooltip = function(el) {
+    document.querySelectorAll('.ach-item').forEach(function(item) {
+      if (item !== el) item.classList.remove('active');
+    });
+    el.classList.toggle('active');
+  };
 
- // Save Steam ID to Firebase
- window.steamSaveId = function() {
- var input = document.getElementById('steamIdInput');
- var steamId = input.value.trim();
- if (!steamId) {
- alert('Введите Steam ID');
- return;
- }
+  window.achToggleAdmin = function() {
+    var panel = document.getElementById('achAdminPanel');
+    panel.classList.toggle('visible');
+  };
 
- steamRef.set({
- steamId: steamId,
- verified: false,
- verifyCode: '',
- username: profileUsername,
- userId: profileUserId,
- savedAt: firebase.database.ServerValue.TIMESTAMP
- });
+  window.achSelectImg = function(el, url) {
+    selectedImgUrl = url;
+    document.querySelectorAll('.ach-img-option').forEach(function(opt) {
+      opt.classList.remove('selected');
+    });
+    el.classList.add('selected');
+    document.getElementById('achSelectedImg').value = url;
+  };
 
- // Show verify panel
- steamShowVerifyPanel();
- };
+  window.achAdd = function() {
+    var img = document.getElementById('achSelectedImg').value;
+    var title = document.getElementById('achTitle').value.trim();
+    var desc = document.getElementById('achDesc').value.trim();
 
- window.steamShowVerifyPanel = function() {
- var panel = document.getElementById('steamVerifyPanel');
+    if (!img) {
+      alert('Выберите картинку достижения!');
+      return;
+    }
+    if (!title) {
+      alert('Введите название достижения!');
+      return;
+    }
 
- // Generate and save verify code
- var code = generateVerifyCode();
- steamRef.update({
- verifyCode: code
- });
+    var newItem = {
+      img: img,
+      title: title,
+      desc: desc,
+      addedAt: Date.now()
+    };
 
- document.getElementById('steamVerifyCode').textContent = code;
- document.getElementById('steamSuccessMsg').classList.remove('show');
- document.getElementById('steamConfirmBtn').style.display = '';
- panel.classList.remove('steam-verify-hidden');
- };
+    // Читаем текущий массив, добавляем, сохраняем
+    achGetData(function(data) {
+      data.push(newItem);
+      achSaveData(data);
+    });
 
- window.steamHideVerifyPanel = function() {
- document.getElementById('steamVerifyPanel').classList.add('steam-verify-hidden');
- };
+    // Сброс формы
+    document.getElementById('achTitle').value = '';
+    document.getElementById('achDesc').value = '';
+    document.getElementById('achSelectedImg').value = '';
+    selectedImgUrl = '';
+    document.querySelectorAll('.ach-img-option').forEach(function(opt) {
+      opt.classList.remove('selected');
+    });
+    document.getElementById('achAdminPanel').classList.remove('visible');
+  };
 
- window.steamCopyCode = function() {
- var code = document.getElementById('steamVerifyCode').textContent;
- navigator.clipboard.writeText(code).then(function() {
- var btn = document.querySelector('.steam-code-copy');
- var origText = btn.textContent;
- btn.textContent = 'Скопировано!';
- setTimeout(function() { btn.textContent = origText; }, 2000);
- }).catch(function() {
- var ta = document.createElement('textarea');
- ta.value = code;
- document.body.appendChild(ta);
- ta.select();
- document.execCommand('copy');
- document.body.removeChild(ta);
- alert('Код скопирован: ' + code);
- });
- };
+  window.achDelete = function(index) {
+    if (!confirm('Удалить это достижение?')) return;
+    achGetData(function(data) {
+      data.splice(index, 1);
+      achSaveData(data);
+    });
+  };
 
- // Confirm verification — mark as verified in Firebase
- window.steamConfirmVerify = function() {
- steamRef.update({
- verified: true,
- verifiedAt: firebase.database.ServerValue.TIMESTAMP
- });
+  // Закрытие тултипа по клику вне
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.ach-item')) {
+      document.querySelectorAll('.ach-item').forEach(function(item) {
+        item.classList.remove('active');
+      });
+    }
+  });
+})();
 
- document.getElementById('steamSuccessMsg').classList.add('show');
- document.getElementById('steamConfirmBtn').style.display = 'none';
 
- setTimeout(function() {
- steamHideVerifyPanel();
- }, 3000);
- };
+// ====================================================================
+// STEAM ID ВЕРИФИКАЦИЯ — Firebase + бэкенд steam-verify-backend.onrender.com
+// Путь в Firebase: steamIds/$_USER_ID$
+// Структура: { steamId, verified, verifyCode, username, userId, savedAt, verifiedAt }
+// ====================================================================
+(function() {
+  var steamRef = db.ref('steamIds/' + profileUserId);
+
+  window.addEventListener('DOMContentLoaded', function() {
+    // Слушаем изменения в реальном времени
+    steamRef.on('value', function(snapshot) {
+      var data = snapshot.val();
+      steamRender(data);
+    }, function(err) {
+      console.error('Firebase steamIds error:', err);
+    });
+  });
+
+  function generateVerifyCode() {
+    var part1 = Math.random().toString(36).substring(2, 7).toUpperCase();
+    var part2 = Math.random().toString(36).substring(2, 7).toUpperCase();
+    return 'APEX-' + part1 + '-' + part2;
+  }
+
+  function getSteamProfileUrl(steamId) {
+    steamId = steamId.trim();
+    if (steamId.indexOf('STEAM_') === 0) {
+      var parts = steamId.split(':');
+      if (parts.length === 3) {
+        var accountId = parseInt(parts[2]) * 2 + parseInt(parts[1]);
+        var base = 76561197960265728;
+        if (typeof BigInt !== 'undefined') {
+          var result = BigInt(base) + BigInt(accountId);
+          return 'https://steamcommunity.com/profiles/' + result.toString();
+        } else {
+          return 'https://steamcommunity.com/profiles/' + (base + accountId);
+        }
+      }
+    }
+    if (/^\d{17}$/.test(steamId)) {
+      return 'https://steamcommunity.com/profiles/' + steamId;
+    }
+    return 'https://steamcommunity.com/profiles/' + steamId.replace(/[^a-zA-Z0-9_-]/g, '');
+  }
+
+  function steamRender(data) {
+    if (!data) data = {};
+
+    var input = document.getElementById('steamIdInput');
+    var saveBtn = document.getElementById('steamSaveBtn');
+    var statusRow = document.getElementById('steamStatusRow');
+    var verifiedRow = document.getElementById('steamVerifiedRow');
+
+    if (!input) return;
+
+    // Заполняем инпут
+    if (data.steamId) {
+      input.value = data.steamId;
+    }
+
+    // Скрываем элементы управления для чужого профиля
+    if (!isOwnProfile) {
+      input.readOnly = true;
+      if (saveBtn) saveBtn.style.display = 'none';
+    }
+
+    if (data.verified && data.steamId) {
+      // Подтверждён
+      statusRow.style.display = 'none';
+      verifiedRow.style.display = 'flex';
+      var link = document.getElementById('steamProfileLink');
+      link.href = getSteamProfileUrl(data.steamId);
+      link.textContent = data.steamId;
+    } else if (data.steamId) {
+      // Сохранён, но не подтверждён
+      statusRow.style.display = 'flex';
+      verifiedRow.style.display = 'none';
+
+      var badge = document.getElementById('steamStatusBadge');
+      badge.className = 'steam-status-badge unverified';
+      badge.innerHTML = '<span class="material-symbols-outlined">pending</span><span id="steamStatusText">Не подтверждён</span>';
+    } else {
+      // Нет данных
+      statusRow.style.display = 'none';
+      verifiedRow.style.display = 'none';
+    }
+  }
+
+  // Сохранение Steam ID в Firebase
+  window.steamSaveId = function() {
+    var input = document.getElementById('steamIdInput');
+    var steamId = input.value.trim();
+    if (!steamId) {
+      alert('Введите Steam ID');
+      return;
+    }
+
+    var verifyCode = generateVerifyCode();
+
+    steamRef.set({
+      steamId: steamId,
+      verified: false,
+      verifyCode: verifyCode,
+      username: profileUserName,
+      userId: profileUserId,
+      savedAt: firebase.database.ServerValue.TIMESTAMP
+    });
+
+    // Показываем панель верификации
+    document.getElementById('steamVerifyCode').textContent = verifyCode;
+    document.getElementById('steamSuccessMsg').classList.remove('show');
+    document.getElementById('steamVerifyPanel').classList.remove('steam-verify-hidden');
+  };
+
+  window.steamShowVerifyPanel = function() {
+    steamRef.once('value', function(snapshot) {
+      var data = snapshot.val() || {};
+      var verifyCode = data.verifyCode;
+
+      if (!verifyCode) {
+        verifyCode = generateVerifyCode();
+        steamRef.update({ verifyCode: verifyCode });
+      }
+
+      document.getElementById('steamVerifyCode').textContent = verifyCode;
+      document.getElementById('steamSuccessMsg').classList.remove('show');
+      document.getElementById('steamVerifyPanel').classList.remove('steam-verify-hidden');
+    });
+  };
+
+  window.steamHideVerifyPanel = function() {
+    document.getElementById('steamVerifyPanel').classList.add('steam-verify-hidden');
+  };
+
+  window.steamCopyCode = function() {
+    var code = document.getElementById('steamVerifyCode').textContent;
+    navigator.clipboard.writeText(code).then(function() {
+      var btn = document.querySelector('.steam-code-copy');
+      var origText = btn.textContent;
+      btn.textContent = 'Скопировано!';
+      setTimeout(function() { btn.textContent = origText; }, 2000);
+    }).catch(function() {
+      var ta = document.createElement('textarea');
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      alert('Код скопирован: ' + code);
+    });
+  };
+
+  // Подтверждение через бэкенд steam-verify-backend.onrender.com
+  window.steamConfirmVerify = function() {
+    steamRef.once('value', function(snapshot) {
+      var data = snapshot.val();
+      if (!data || !data.steamId || !data.verifyCode) {
+        alert('Сначала сохраните Steam ID');
+        return;
+      }
+
+      var btn = document.getElementById('steamConfirmBtn');
+      var originalText = btn.textContent;
+      btn.textContent = 'Проверяем...';
+      btn.disabled = true;
+
+      // Запрос к бэкенду на Render
+      fetch(BACKEND_URL + '/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          steamId: data.steamId,
+          code: data.verifyCode
+        })
+      })
+      .then(function(response) { return response.json(); })
+      .then(function(result) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+
+        if (result.verified === true) {
+          // Бэкенд подтвердил — пишем в Firebase
+          steamRef.update({
+            verified: true,
+            verifiedAt: firebase.database.ServerValue.TIMESTAMP
+          });
+
+          document.getElementById('steamSuccessMsg').classList.add('show');
+          document.getElementById('steamConfirmBtn').style.display = 'none';
+
+          setTimeout(function() {
+            steamHideVerifyPanel();
+            document.getElementById('steamConfirmBtn').style.display = '';
+          }, 3000);
+        } else {
+          // Бэкенд не нашёл код
+          alert('Код не найден в профиле Steam. Убедитесь, что вы вставили код в поле «О себе» и сохранили профиль. ' + (result.message || ''));
+        }
+      })
+      .catch(function(err) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        console.error('Backend error:', err);
+        // Если бэкенд недоступен — fallback на ручное подтверждение
+        if (confirm('Бэкенд недоступен. Подтвердить вручную? (только для теста)')) {
+          steamRef.update({
+            verified: true,
+            verifiedAt: firebase.database.ServerValue.TIMESTAMP
+          });
+          document.getElementById('steamSuccessMsg').classList.add('show');
+          document.getElementById('steamConfirmBtn').style.display = 'none';
+          setTimeout(function() {
+            steamHideVerifyPanel();
+            document.getElementById('steamConfirmBtn').style.display = '';
+          }, 3000);
+        }
+      });
+    });
+  };
 })();
 </script>
-<!-- === END STEAM VERIFICATION SCRIPT === -->
