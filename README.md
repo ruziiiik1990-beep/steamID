@@ -10,13 +10,24 @@
 <style>
 
 
- * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
  html, body { overflow: hidden; }
  body {
    font-family: 'Inter', sans-serif;
    background: transparent;
    color: #e0e6f0;
  }
+
+ /* Принудительно уничтожаем автоматический заголовок темы GitHub Pages */
+ #header, header, h1, .header, a[href*="steamID"] {
+   display: none !important;
+   opacity: 0 !important;
+   visibility: hidden !important;
+   height: 0 !important;
+   margin: 0 !important;
+   padding: 0 !important;
+ }
+
 
  /* === Profile Table (как на странице пользователя) === */
  .profile-table-wrapper {
