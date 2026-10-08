@@ -203,7 +203,7 @@
 <div class="profile-table-wrapper">
   <div class="profile-body">
     <div class="profile-section">
-      <h3 class="profile-section-name">
+      
         <span class="material-symbols-outlined">stadia_controller</span>
         Steam ID — Верификация профиля
       </h3>
