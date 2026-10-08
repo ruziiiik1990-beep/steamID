@@ -459,6 +459,18 @@ function showUnverifiedState() {
   badge.innerHTML = '<span class="material-symbols-outlined">pending</span><span id="steamStatusText">Не подтверждён</span>';
 }
 </script>
+<script>
+function sendHeight() {
+  var h = Math.max(document.body.scrollHeight, document.body.offsetHeight,
+    document.documentElement.scrollHeight, document.documentElement.offsetHeight);
+  window.parent.postMessage({ type: 'resize', frame: 'achievements', height: h }, '*');
+}
+window.addEventListener('load', sendHeight);
+setTimeout(sendHeight, 500);
+setTimeout(sendHeight, 1500);
+setTimeout(sendHeight, 3000);
+if (window.ResizeObserver) { new ResizeObserver(sendHeight).observe(document.body); }
+</script>
 
 </body>
 </html>
